@@ -7,7 +7,7 @@ systemctl disable mariadb-check.service
 sleep 2
 rm -rf /home/galeraha
 
-#安装依赖包
+#卸载依赖包
 PY_VERSION=`python -V 2>&1|awk '{print $2}'|awk -F '.' '{print $1}'`
 
 if (( $PY_VERSION == 3 ))
