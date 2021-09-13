@@ -1,0 +1,10 @@
+[Unit]
+Description=Socket Service for MariaDB check
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/usr/bin/python3 /home/galeraha/socket_server.py
+
+[Install]
+WantedBy=multi-user.target
