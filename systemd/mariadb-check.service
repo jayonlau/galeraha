@@ -5,7 +5,7 @@ Requires=docker.service
 
 [Service]
 Type=idle
-ExecStart=/usr/bin/python3 /home/galeraha/mariadb_check.py
+ExecStart=/usr/bin/python /home/galeraha/mariadb_check.py
 
 [Install]
 WantedBy=multi-user.target

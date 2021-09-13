@@ -3,8 +3,13 @@
 
 import os
 import time
-import MySQLdb
 import logging
+import sys
+
+if(sys.version[:1] == "3"):
+    import pymysql
+else:
+    import MySQLdb
 
 # 定义一些初始变量
 mysql_user = "haproxy"
@@ -38,11 +43,10 @@ def test_galera_connection():
     retry = 0
     while retry < 10:
         try:
-            conn = MySQLdb.connect(host=host
-                           ,port=3306
-                           ,user=mysql_user
-                           ,passwd=mysql_pw
-                           ,db='information_schema')
+            if(sys.version[:1] == "3"):
+                conn = pymysql.connect(host=host, port=3306, user=mysql_user, passwd=mysql_pw, db='information_schema')
+            else:
+                conn = MySQLdb.connect(host=host, port=3306, user=mysql_user, passwd=mysql_pw, db='information_schema')
             print('already connect to mariadb server')
             return True
         except Exception as e:
@@ -54,11 +58,10 @@ def test_galera_connection():
 def get_important_value():
 
     # Open database connection
-    conn = MySQLdb.connect(host=host
-                           ,port=3306
-                           ,user=mysql_user
-                           ,passwd=mysql_pw
-                           ,db='information_schema')
+    if(sys.version[:1] == "3"):
+        conn = pymysql.connect(host=host, port=3306, user=mysql_user, passwd=mysql_pw, db='information_schema')
+    else:
+        conn = MySQLdb.connect(host=host, port=3306, user=mysql_user, passwd=mysql_pw, db='information_schema')
 
     # prepare a cursor object using cursor() method
     cursor = conn.cursor()
