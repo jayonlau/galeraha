@@ -23,7 +23,7 @@ if not os.path.exists(log_file):
     os.system('mkdir -p /home/galeraha/')
     os.system('touch ' + log_file)
 
-formatter = logging.Formatter('%(asctime)s (filename)s[line:%(lineno)d] %(levelname)s %(message)s')
+formatter = logging.Formatter('%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s')
 file_handler = logging.FileHandler(log_file)
 file_handler.setFormatter(formatter)
 
