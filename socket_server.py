@@ -6,6 +6,7 @@ import sys
 import logging
 import json
 import galera_util
+from logging.handlers import RotatingFileHandler
 
 if(sys.version[:1] == "3"):
     import _thread as thread
@@ -20,7 +21,7 @@ if not os.path.exists(log_file):
     os.system('touch ' + log_file)
 
 formatter = logging.Formatter('%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s')
-file_handler = logging.FileHandler(log_file)
+file_handler = RotatingFileHandler(log_file, maxBytes=100 * 1024 * 1024, backupCount=3)
 file_handler.setFormatter(formatter)
 
 logger.addHandler(file_handler)

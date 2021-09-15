@@ -9,6 +9,7 @@ import sys
 import json
 import galera_util
 import socket
+from logging.handlers import RotatingFileHandler
 
 # 定义一些初始变量
 galera_conf = "/etc/kolla/mariadb/galera.cnf"
@@ -21,7 +22,7 @@ if not os.path.exists(log_file):
     os.system('touch ' + log_file)
 
 formatter = logging.Formatter('%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s')
-file_handler = logging.FileHandler(log_file)
+file_handler = RotatingFileHandler(log_file, maxBytes=100 * 1024 * 1024, backupCount=3)
 file_handler.setFormatter(formatter)
 
 logger.addHandler(file_handler)

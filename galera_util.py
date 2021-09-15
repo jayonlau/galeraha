@@ -5,6 +5,7 @@ import os
 import time
 import logging
 import sys
+from logging.handlers import RotatingFileHandler
 
 if(sys.version[:1] == "3"):
     import pymysql
@@ -24,7 +25,7 @@ if not os.path.exists(log_file):
     os.system('touch ' + log_file)
 
 formatter = logging.Formatter('%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s')
-file_handler = logging.FileHandler(log_file)
+file_handler = RotatingFileHandler(log_file, maxBytes=100 * 1024 * 1024, backupCount=3)
 file_handler.setFormatter(formatter)
 
 logger.addHandler(file_handler)
